@@ -116,24 +116,26 @@ function App() {
       const newTodos = [{ text: text }];
       setTodos(newTodos);
     }
-    toast.warn(text + " is added");
+    const warning = text + " is added";
+    toast.warn(warning);
   };
 
   const completeTodo = index => {
     const newTodos = [...todos];
-    toast.success(newTodos[index].text + " is completed");
+    const completed = newTodos[index].text + " is completed";
+    toast.success(completed);
     // alert(newTodos[index].text + " is completed");
     newTodos[index].isCompleted = true;
     setTodos(newTodos);
   };
 
   const removeTodo = index => {
-    toast.error(todos[index].text + " is removed", {
+    const newTodos = [...todos];
+    const removedTask = newTodos[index].text + " is removed";
+    toast.error(removedTask, {
       // position: toast.POSITION.TOP_RIGHT  (can use this or the bottom one)
       position: "top-right"
     });
-    const newTodos = [...todos];
-
     newTodos.splice(index, 1);
     setTodos(newTodos);
   };
