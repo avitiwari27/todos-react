@@ -1,6 +1,6 @@
 {
   "name": "todo-app-hook",
-  "homepage": "https://avitiwari27.github.io/todos-react/",
+  "homepage": "https://avitiwari27.github.io/todos-react/public",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
