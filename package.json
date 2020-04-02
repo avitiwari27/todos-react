@@ -1,13 +1,9 @@
 {
 
   "name": "todo-react",
-<<<<<<< HEAD
-  "homepage": "https://avitiwari27.github.io/todos-react/public/index.html",
-=======
  
   "homepage": "https://avitiwari27.github.io/todos-react/public/index.html",
 
->>>>>>> 9a33b98c1b423b19b5b2e278d872cde85e1f67e2
   "version": "0.1.0",
   "private": true,
   "dependencies": {
