@@ -1,78 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { Button, Card, Container, CardGroup } from "react-bootstrap";
+import Todo from "./components/Todo";
+import TodoForm from "./components/TodoForms";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-
-// const Todo = ({ todo }) => <div className="todo">{todo.text}</div>;
-
-function Todo({ todo, index, completeTodo, removeTodo }) {
-  return (
-    <div
-      className="todo"
-      style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
-    >
-      {todo.text}
-      {/* {JSON.stringify(!todo.issCompleted)} */}
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={true}
-        closeOnClick
-        rtl={false}
-        pauseOnVisibilityChange
-        draggable
-        pauseOnHover
-      />
-      <div>
-        <Button
-          variant="success"
-          // style={{ background: "green", color: "white" }}
-          onClick={() => completeTodo(index)}
-        >
-          Complete
-        </Button>
-        {/* <Button variant="danger" onClick={() => removeTodo(index)}>
-          X
-        </Button> */}
-        <button
-          type="button"
-          class="btn btn-outline-danger"
-          onClick={() => removeTodo(index)}
-        >
-          X
-        </button>
-      </div>
-    </div>
-  );
-}
-
-// To add new todo in the list (with form)
-
-function TodoForm({ addTodo }) {
-  const [value, setValue] = useState(""); // value to store state, setValue to define how
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (!value) return;
-
-    addTodo(value);
-    setValue("");
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        className="input"
-        value={value}
-        placeholder="Add a new task"
-        onChange={e => setValue(e.target.value)}
-      />
-    </form>
-  );
-}
 
 function App() {
   const retrivedData = () => JSON.parse(window.localStorage.getItem("todos")); // retriving string and coverting to object array
@@ -99,8 +31,12 @@ function App() {
   // update task remaining, i.e. todos with isComplete: false
   useEffect(() => {
     // console.log(todos.filter(todo => todo.issCompleted === undefined)); //
-    setTasksRemaining(todos && todos.filter(todo => !todo.isCompleted).length);
-    setCompletedTask(todos && todos.filter(todos => todos.isCompleted).length);
+    setTasksRemaining(
+      todos && todos.filter((todo) => !todo.isCompleted).length
+    );
+    setCompletedTask(
+      todos && todos.filter((todos) => todos.isCompleted).length
+    );
 
     window.localStorage.setItem("todos", JSON.stringify(todos)); // stores data in local storage in string form, so making array-object string
 
@@ -108,7 +44,7 @@ function App() {
     // window.localStorage.setItem("taskCompleted", completedTask);
   }, [todos]); // using [todos], so that the useEffect tasks works only when there is change in todos
 
-  const addTodo = text => {
+  const addTodo = (text) => {
     if (todos && todos.length > 0) {
       const newTodos = [...todos, { text }];
       setTodos(newTodos);
@@ -120,7 +56,7 @@ function App() {
     toast.warn(warning);
   };
 
-  const completeTodo = index => {
+  const completeTodo = (index) => {
     const newTodos = [...todos];
     const completed = newTodos[index].text + " is completed";
     toast.success(completed);
@@ -129,12 +65,12 @@ function App() {
     setTodos(newTodos);
   };
 
-  const removeTodo = index => {
+  const removeTodo = (index) => {
     const newTodos = [...todos];
     const removedTask = newTodos[index].text + " is removed";
     toast.error(removedTask, {
       // position: toast.POSITION.TOP_RIGHT  (can use this or the bottom one)
-      position: "top-right"
+      position: "top-right",
     });
     newTodos.splice(index, 1);
     setTodos(newTodos);
