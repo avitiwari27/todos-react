@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { Button, Card, Container, CardGroup } from "react-bootstrap";
+import { Card, Container, CardGroup } from "react-bootstrap";
 import Todo from "./components/Todo";
 import TodoForm from "./components/TodoForms";
 import "react-toastify/dist/ReactToastify.css";
@@ -53,13 +53,17 @@ function App() {
       setTodos(newTodos);
     }
     const warning = text + " is added";
-    toast.warn(warning);
+    toast.warn(warning, {
+      position: "top-right",
+    });
   };
 
   const completeTodo = (index) => {
     const newTodos = [...todos];
     const completed = newTodos[index].text + " is completed";
-    toast.success(completed);
+    toast.success(completed, {
+      position: "top-right",
+    });
     // alert(newTodos[index].text + " is completed");
     newTodos[index].isCompleted = true;
     setTodos(newTodos);
@@ -86,16 +90,6 @@ function App() {
       <Container fluid style={{ background: "#209cee", height: "100%" }}>
         <div className="header">My TODOs</div>
         <div className="todo-list">
-          {todos &&
-            todos.map((todo, index) => (
-              <Todo
-                key={index}
-                index={index}
-                todo={todo}
-                completeTodo={completeTodo}
-                removeTodo={removeTodo}
-              />
-            ))}
           <div className="create-task">
             <TodoForm addTodo={addTodo} />
           </div>
@@ -111,6 +105,17 @@ function App() {
               </Card.Body>
             </Card>
           </CardGroup>
+
+          {todos &&
+            todos.map((todo, index) => (
+              <Todo
+                key={index}
+                index={index}
+                todo={todo}
+                completeTodo={completeTodo}
+                removeTodo={removeTodo}
+              />
+            ))}
         </div>
       </Container>
     </div>
